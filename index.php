@@ -22,12 +22,72 @@ Facciamo attenzione all’organizzazione del codice, suddividendolo in appositi 
 
 <?php 
 include './class/Movie.php';
+include './class/Genres.php';
 
-$movieone = new Movie("Pulp Fiction", "John Travolta", "Samuel L Jackson", "Quentin Tarantino", "1994", "./assets/img/locandine-il-cinema-per-immagini-pulp-fiction_00.jpg", "Action");
-$movietwo = new Movie("Inglorious Basterds","Brad Pitt", "Tim Roth","quentin Tarantino", "2009", "./assets/img/locandinapg15.jpg", "Action");
+$movieone = new Movie("Pulp Fiction", "John Travolta", "Samuel L Jackson", "Quentin Tarantino", "1994", "./assets/img/locandine-il-cinema-per-immagini-pulp-fiction_00.jpg", new Genres("Action", null, null, null, null, null));
 
-var_dump($movieone);
-var_dump($movietwo);
+$movietwo = new Movie("Inglorious Basterds","Brad Pitt", "Tim Roth","Quentin Tarantino", "2009", "./assets/img/locandinapg15.jpg", new Genres( null, null, "Thriller", null, null, null));
 
+$moviethree = new Movie("Reservoir Dogs","Harvey Keitel", "Steve Buscemi","Quentin Tarantino", "1992", "./assets/img/reservoir.jpg", new Genres( null, null, null, null, "Drama", null));
+
+
+//var_dump($movieone);
+//var_dump($movietwo);
+$movies = [$movieone, $movietwo, $moviethree];
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css' integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==' crossorigin='anonymous' />
+    <style>
+      img {
+        height: 150px;
+      }
+    </style>
+    <title>Movies</title>
+</head>
+
+<body>
+  <h1 class="text-center">MyMovies</h1>
+  <table class="table table-dark table-striped m-auto my-5 text-center">
+    <thead>
+      <tr>
+        <th scope="col">title</th>
+        <th scope="col">poster</th>
+        <th scope="col">genre</th>
+        <th scope="col">actorOne</th>
+        <th scope="col">actorTwo</th>
+        <th scope="col">movieDirector</th>
+        <th scope="col">year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($movies as $movie) : ?>
+        <tr class="text-center">
+          <td><h5><?php echo $movie->title ?></h5></td>
+          <td> <img class="thumbnail" src="<?php echo $movie->poster ?>" alt="image"></td>
+          <td> 
+            <?php echo $movie->genres?->action ?>
+            <?php echo $movie->genres?->horror ?>
+            <?php echo $movie->genres?->thriller ?>
+            <?php echo $movie->genres?->fantasy ?>
+            <?php echo $movie->genres?->drama ?>
+            <?php echo $movie->genres?->comedy ?>
+          </td>
+          <td><?php echo $movie->actorOne ?></td>
+          <td><?php echo $movie->actorTwo ?></td>
+          <td><?php echo $movie->movieDirector ?></td>
+          <td><?php echo $movie->year ?></td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+</body>
+
+</html>

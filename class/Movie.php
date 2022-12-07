@@ -9,7 +9,7 @@ class Movie
   public $movieDirector;
   public $year;
   public $poster;
-  public $genre;
+  public $genres;
 
   /**
    * @param String $title
@@ -18,17 +18,17 @@ class Movie
    * @param String $movieDirector
    * @param String $year
    * @param String $poster
-   * @param String $genre
+   * @param String $genres
    */
 
-  public function __construct($_title, $_actorOne, $_actorTwo, $_movieDirector, $_year, $_poster, $_genre){
+  public function __construct($_title, $_actorOne, $_actorTwo, $_movieDirector, $_year, $_poster, Genres $_genres){
     $this->title = $_title;
     $this->actorOne = $_actorOne;
     $this->actorTwo = $_actorTwo;
     $this->movieDirector = $_movieDirector;
     $this->year = $_year;
     $this->poster = $_poster;
-    $this->genre = $_genre;
+    $this->genres = $_genres;
   }
 
   public function setPoster($_poster)
